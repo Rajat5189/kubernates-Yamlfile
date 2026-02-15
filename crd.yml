@@ -1,0 +1,29 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: databases.example.com   # CRD का नाम (plural)
+spec:
+  group: example.com            # API group
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:                   # Validation के लिए schema
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                dbName:
+                  type: string
+                size:
+                  type: integer
+  scope: Namespaced              # Namespace के अंदर resource होगा
+  names:
+    plural: databases            # CRD के plural नाम
+    singular: database           # singular नाम
+    kind: Database               # resource kind
+    shortNames:
+    - db
+
